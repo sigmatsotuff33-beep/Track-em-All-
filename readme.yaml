@@ -1,0 +1,21 @@
+
+---
+
+## 🚀 Features
+
+- **Shodan lookup** via Python’s `requests` or the Shodan SDK  
+- **Image analysis**
+- **Video frame counting / preprocessing**
+- **YOLO detection pipeline** (integrated through `vision/detect.py`)
+- **Ruby menu system** calling Python tasks through subprocesses
+- **JSON-based IPC (interprocess communication)**
+
+---
+
+## 🔧 Installation
+
+### 1. Python dependencies
+
+```bash
+cd project/python
+pip install -r requirements.txt

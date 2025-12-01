@@ -1,30 +1,43 @@
+#stable version
+
 import sys
 import json
 from ultralytics import YOLO
 
-# Load YOLO model
-model = YOLO("yolov8n.pt")
+def main():
+    if len(sys.argv) < 2:
+        print(json.dumps({"error": "no image provided"}))
+        return
 
-# Image path from Ruby
-image_path = sys.argv[1]
+    image_path = sys.argv[1]
 
-# Run inference
-result = model(image_path)[0]
+    try:
+        model = YOLO("yolov8n.pt")
+        results = model(image_path)
 
-detections = []
+        # results is usually a list
+        result = results[0]
 
-for box in result.boxes:
-    cls = int(box.cls[0])
-    name = model.names[cls]
-    conf = float(box.conf[0])
+        detections = []
 
-    x1, y1, x2, y2 = map(float, box.xyxy[0])
+        for box in result.boxes:
+            cls_id = int(box.cls[0])
+            label = model.names.get(cls_id, str(cls_id))
+            conf = float(box.conf[0])
 
-    detections.append({
-        "label": name,
-        "confidence": conf,
-        "bbox": [x1, y1, x2, y2]
-    })
+            x1, y1, x2, y2 = map(float, box.xyxy[0])
 
-# Print JSON to Ruby
-print(json.dumps(detections))
+            detections.append({
+                "label": label,
+                "confidence": conf,
+                "bbox": [x1, y1, x2, y2]
+            })
+
+        print(json.dumps(detections))
+
+    except Exception as e:
+        # Send a meaningful JSON error back to Ruby
+        print(json.dumps({"error": str(e)}))
+
+if __name__ == "__main__":
+    main()

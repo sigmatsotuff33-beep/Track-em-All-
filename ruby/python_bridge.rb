@@ -1,21 +1,20 @@
 require "open3"
-require "json"
 
 module PythonBridge
-    PYTHON = "python3"
-    BASE = File.expand_path("../python", __dir__)
-    
-    def self.call_python(task, arg)
-        script = File.join(BASE, "pythonapp.py")
-        stdout, stderr, status =
-            Open3,capture(PYTHON, script, task, arg)
-        
-        return {error: stderr}.to_join unless status.success?
-        
-        stdout
+  PYTHON = "python3"     
+  SCRIPT  = "../pythonapp.py"  
+
+  def self.call_python(task, arg)
+    stdout, stderr, status = Open3.capture3(PYTHON, SCRIPT, task, arg)
+
+    if status.success?
+      stdout
+    else
+      "Python error: #{stderr}"
     end
-    
-    def self.run_python_cli
-        system(PYTHON, File.join(BASE, "pythonapp.py"))
-    end
+  end
+
+  def self.run_python_cli
+    system(PYTHON, SCRIPT)
+  end
 end

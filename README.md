@@ -25,6 +25,54 @@ ive been learning to code for around 7 months and at the same time to learn hack
 <a href="https://github.com/sigmatsotuff33-beep" align="left"><img src="https://github-readme-stats.vercel.app/api/top-langs/?username=sigmatsotuff33-beep&langs_count=10&title_color=0891b2&text_color=ffffff&icon_color=0891b2&bg_color=1c1917&hide_border=true&locale=en&custom_title=Top%20%Languages" alt="Top Languages" /></a>
 
 
+TEA Version : v.0.2, minor updates:
+-made the code stable
+-prevented common crash
+-
+Detailed log changes:
+-Added missing end for case
+-Added missing end for def
+-Cleaned indentation
+-Corrected menu logic blocks
+-
+Why:
+-
+The interpreter was falling through the floor looking for closure points. Now the file stands upright.
+-
+Added proper end alignment
+Removed stray braces/brackets
+Cleaned spacing
+-
+Why:
+The string was a tangled marionette Ruby couldn’t parse it.
+-
+Open3,capture(...) → Open3.capture3(...)
+Added correct return handling for stdout/stderr/status
+Ensured correct script pathing (../pythonapp.py)
+Added simple run_python_cli wrapper
+-
+Why:
+Open3,capture never existed; Ruby was calling ghosts. The corrected version now actually invokes Python.
+-
+Wrapped everything in a main() function
+Added argument sanity checks
+Added JSON-wrapped error fallback
+Ensured YOLO results are indexed correctly
+Sanitized and extracted bounding boxes safely
+-
+Why:
+The original would crash if Ruby called it without arguments or if YOLO returned oddly shaped results.
+-
 
-THIS IS JUST THE OPEN ALPHA ESPECT PROBLEMS.
+What and why this helped/future updates:
+A functioning Ruby front-end
+A Python backend that actually responds
+A correct cross-language bridge (Ruby → Python)
+A repaired YOLO script
+A clean architecture for future GUI work
+-
+
+
+*THIS IS JUST THE OPEN ALPHA ESPECT PROBLEMS.*
+-
 
